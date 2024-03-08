@@ -639,7 +639,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -758,7 +758,7 @@ require('lazy').setup({
       --    you can use this plugin to help you. It even has snippets
       --    for various frameworks/libraries/etc. but you will have to
       --    set up the ones that are useful for you.
-      -- 'rafamadriz/friendly-snippets',
+      'rafamadriz/friendly-snippets',
     },
     config = function()
       -- See `:help cmp`
@@ -887,8 +887,8 @@ require('lazy').setup({
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       require('treesitter-context').setup {
-        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        max_lines = 20, -- How many lines the window should span. Values <= 0 mean no limit.
+        enable = false, -- Enable this plugin (Can be enabled/disabled later via commands)
+        max_lines = 10, -- How many lines the window should span. Values <= 0 mean no limit.
         min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
         line_numbers = true,
         multiline_threshold = 20, -- Maximum number of lines to show for a single context
@@ -927,6 +927,7 @@ require('lazy').setup({
     end,
   },
 
+  -- File explorer like buffer
   {
     'stevearc/oil.nvim',
     event = 'VimEnter',
@@ -942,6 +943,18 @@ require('lazy').setup({
         },
       }
       vim.keymap.set('n', '-', '<CMD>Oil --float<CR>', { desc = 'Open parent directory' })
+    end,
+  },
+
+  -- Setting up sessions for neovim
+  -- use
+  {
+    'rmagatti/auto-session',
+    config = function()
+      require('auto-session').setup {
+        log_level = 'error',
+        auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      }
     end,
   },
 
@@ -963,6 +976,62 @@ require('lazy').setup({
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   -- { import = 'custom.plugins' },
+
+  -- Custom ascii art
+  {
+    'goolord/alpha-nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = function()
+      local alpha = require 'alpha'
+      local dashboard = require 'alpha.themes.dashboard'
+
+      -- Set header
+      dashboard.section.header.val = {
+        '                                                     ',
+        '  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
+        '  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
+        '  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
+        '  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
+        '  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
+        '  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
+        '                                                     ',
+      }
+
+      -- Set menu
+      dashboard.section.buttons.val = {
+        dashboard.button('enter', '󰈚  Restore Session', ':SessionRestore<cr>'),
+        dashboard.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
+        dashboard.button('f', '  Find File', ':Telescope find_files<CR>'),
+        dashboard.button('r', '󰈚  Recent Files', ':Telescope oldfiles<CR>'),
+        dashboard.button('s', '  Settings', ':e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>'),
+        dashboard.button('q', '󰗼  Quit NVIM', ':qa<CR>'),
+      }
+
+      local fortune = require 'alpha.fortune'
+      dashboard.section.footer.val = fortune()
+      dashboard.section.footer.opts.hl = '@alpha.footer'
+      table.insert(dashboard.config.layout, 5, {
+        type = 'padding',
+        val = 1,
+      })
+      -- Send config to alpha
+      -- alpha.setup(dashboard.opts)
+
+      -- Disable folding on alpha buffer
+      vim.cmd [[
+    autocmd FileType alpha setlocal nofoldenable
+]]
+      require('alpha').setup(dashboard.opts)
+      vim.api.nvim_create_autocmd('User', {
+        callback = function()
+          local stats = require('lazy').stats()
+          local ms = math.floor(stats.startuptime * 100) / 100
+          dashboard.section.footer.val = '󱐌 Lazy-loaded ' .. stats.loaded .. '/' .. stats.count .. ' plugins in ' .. ms .. 'ms'
+          pcall(vim.cmd.AlphaRedraw)
+        end,
+      })
+    end,
+  },
 }, {
   ui = {
     -- If you have a Nerd Font, set icons to an empty table which will use the
