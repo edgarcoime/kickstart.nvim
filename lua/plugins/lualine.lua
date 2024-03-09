@@ -35,24 +35,34 @@ return {
       for _, client in pairs(clients) do
         table.insert(c, client.name)
       end
-      return 'LSP: ' .. table.concat(c, '|')
+      return ': ' .. table.concat(c, '|')
     end
 
     require('lualine').setup {
       options = {
-        -- theme = 'horizon',
-        theme = 'catppuccin',
+        theme = 'horizon',
+        -- theme = 'dracula',
         globalstatus = true,
       },
       sections = {
         lualine_b = {
           'branch',
           harpoon_component,
-          'diff',
+          {
+            'diff',
+            symbols = { added = ' ', modified = ' ', removed = ' ' }, -- Changes the symbols used by the diff.
+          },
         },
         lualine_c = {
+          'filename',
+        },
+        lualine_x = {
           clients_lsp,
-          'diagnostics',
+          {
+            'diagnostics',
+            symbols = { error = ' ', warn = ' ', info = ' ', hint = '󰠠 ' },
+          },
+          'filetype',
         },
       },
     }

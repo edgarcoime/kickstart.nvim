@@ -16,7 +16,11 @@ local keymap = vim.keymap
 -- -- window management
 keymap.set('n', '\\', '<C-w>s', { desc = 'Split window horizontally' })
 keymap.set('n', '|', '<C-w>v', { desc = 'Split window vertically' })
---
+
+-- Set ctrl q and ctrl s as save
+keymap.set('n', '<C-s>', '<cmd>w!<cr>', { desc = 'Force Write' })
+keymap.set('n', '<C-q>', '<cmd>qa!<cr>', { desc = 'Force Quit' })
+
 -- keymap.set('n', '<leader>to', '<cmd>tabnew<CR>', { desc = 'Open new tab' }) -- open new tab
 -- keymap.set('n', '<leader>tx', '<cmd>tabclose<CR>', { desc = 'Close current tab' }) -- close current tab
 -- keymap.set('n', '<leader>tn', '<cmd>tabn<CR>', { desc = 'Go to next tab' }) --  go to next tab
