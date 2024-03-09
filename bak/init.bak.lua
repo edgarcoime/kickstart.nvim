@@ -66,8 +66,8 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
+vim.opt.updatetime = 100
+vim.opt.timeoutlen = 150
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -158,7 +158,7 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',    opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Auto pairing
   {
@@ -300,7 +300,7 @@ require('lazy').setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  {                     -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
@@ -346,7 +346,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -443,8 +443,8 @@ require('lazy').setup({
             require('statuscol').setup {
               relculright = true,
               segments = {
-                { text = { builtin.foldfunc },      click = 'v:lua.ScFa' },
-                { text = { '%s' },                  click = 'v:lua.ScSa' },
+                { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
+                { text = { '%s' }, click = 'v:lua.ScSa' },
                 { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
               },
             }
@@ -477,7 +477,7 @@ require('lazy').setup({
     init = function()
       vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
       vim.o.foldcolumn = '1' -- '0' is not bad
-      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
     end,
@@ -843,7 +843,10 @@ require('lazy').setup({
   -- Status bar
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'ThePrimeagen/harpoon',
+    },
     event = 'VeryLazy',
     config = function()
       -- Custom harpoon component in status bar
@@ -888,17 +891,17 @@ require('lazy').setup({
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       require('treesitter-context').setup {
-        enable = false,           -- Enable this plugin (Can be enabled/disabled later via commands)
-        max_lines = 10,           -- How many lines the window should span. Values <= 0 mean no limit.
-        min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+        enable = false, -- Enable this plugin (Can be enabled/disabled later via commands)
+        max_lines = 10, -- How many lines the window should span. Values <= 0 mean no limit.
+        min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
         line_numbers = true,
         multiline_threshold = 20, -- Maximum number of lines to show for a single context
-        trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-        mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
+        trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+        mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
         -- Separator between context and content. Should be a single character string, like '-'.
         -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
         separator = nil,
-        zindex = 20,     -- The Z-index of the context window
+        zindex = 20, -- The Z-index of the context window
         on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
       }
     end,
@@ -1027,8 +1030,7 @@ require('lazy').setup({
         callback = function()
           local stats = require('lazy').stats()
           local ms = math.floor(stats.startuptime * 100) / 100
-          dashboard.section.footer.val = '󱐌 Lazy-loaded ' ..
-          stats.loaded .. '/' .. stats.count .. ' plugins in ' .. ms .. 'ms'
+          dashboard.section.footer.val = '󱐌 Lazy-loaded ' .. stats.loaded .. '/' .. stats.count .. ' plugins in ' .. ms .. 'ms'
           pcall(vim.cmd.AlphaRedraw)
         end,
       })

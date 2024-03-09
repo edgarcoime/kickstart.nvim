@@ -16,3 +16,18 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
     },
   },
 }
+
+-- TODO: packages to setup still
+-- nvim surround - surrounding more movement
+-- nvim ufo - folding
+-- nvim navic - signals
+-- nvim-lsp-config
+-- mason
+-- mason-nvim-dap? - needd a debugger
+-- conform? auto formatting
+-- nvim-cmp - for copletion
+-- snippets
+-- todo comments bufenter
+-- nvim treesitter context ? - optional kinda annoying
+-- auto sessions
+-- goolord
