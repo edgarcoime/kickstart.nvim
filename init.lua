@@ -1,5 +1,5 @@
 -- need this line because not in default folder
-vim.cmd 'set runtimepath^=~/.config/nvim-configs/kickstart'
+-- vim.cmd 'set runtimepath^=~/.config/nvim-configs/kickstart'
 require 'core'
 
 -- TODO: Find a way to incorporate lazy in its own seperate module
@@ -20,6 +20,9 @@ vim.opt.rtp:prepend(lazypath)
 
 -- any custom folder setup should be put in table here
 require('lazy').setup({ { import = 'plugins' }, { import = 'plugins.lsp' } }, {
+  install = {
+    colorscheme = { 'catppuccin' },
+  },
   checker = {
     enabled = true,
     notify = false,

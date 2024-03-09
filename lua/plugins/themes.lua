@@ -8,14 +8,52 @@ return {
   end,
   opts = {
     flavour = 'mocha',
+    -- WARN: is integrations even needed? looks like plugins automatically detect
     integrations = {},
   },
-
-  -- configure integrations here
-  {
-    'LazyVim/LazyVim',
-    opts = {
-      colorscheme = 'catppuccin',
-    },
-  },
 }
+
+-- Optional configs
+-- integrations = {
+--   aerial = true,
+--   alpha = true,
+--   cmp = true,
+--   dashboard = true,
+--   flash = true,
+--   gitsigns = true,
+--   headlines = true,
+--   illuminate = true,
+--   indent_blankline = { enabled = true },
+--   leap = true,
+--   lsp_trouble = true,
+--   mason = true,
+--   markdown = true,
+--   mini = true,
+--   native_lsp = {
+--     enabled = true,
+--     underlines = {
+--       errors = { 'undercurl' },
+--       hints = { 'undercurl' },
+--       warnings = { 'undercurl' },
+--       information = { 'undercurl' },
+--     },
+--   },
+--   navic = { enabled = true, custom_bg = 'lualine' },
+--   neotest = true,
+--   neotree = true,
+--   noice = true,
+--   notify = true,
+--   semantic_tokens = true,
+--   telescope = true,
+--   treesitter = true,
+--   treesitter_context = true,
+--   which_key = true,
+-- },
+
+-- configure integrations here
+-- {
+--   'LazyVim/LazyVim',
+--   opts = {
+--     colorscheme = 'catppuccin',
+--   },
+-- },

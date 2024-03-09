@@ -1,3 +1,4 @@
+-- TODO: Configure lazy to run through this file instead of init.lua
 -- Ensures Lazy plugin manager is installed
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -17,7 +18,6 @@ require('lazy').setup 'plugins'
 -- any custom folder setup should be put in table here
 -- require('lazy').setup {
 --   install = {
---     -- TODO: Might have to install catppuccin first for it to take effect
 --     colorscheme = {},
 --   },
 --   checker = {
