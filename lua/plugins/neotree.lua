@@ -8,6 +8,6 @@ return {
     -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
   },
   config = function()
-    vim.keymap.set('n', '<leader>e', '<cmd>Neotree filesystem reveal left<cr>', {})
+    vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<cr>', { desc = '[E]xplorer Toggle' })
   end,
 }

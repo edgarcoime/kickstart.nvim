@@ -25,6 +25,19 @@ return {
       return string.format('󱡅 %s/%d', current_mark, total_marks)
     end
 
+    local clients_lsp = function()
+      local clients = vim.lsp.buf_get_clients()
+      if next(clients) == nil then
+        return ''
+      end
+
+      local c = {}
+      for _, client in pairs(clients) do
+        table.insert(c, client.name)
+      end
+      return 'LSP: ' .. table.concat(c, '|')
+    end
+
     require('lualine').setup {
       options = {
         -- theme = 'horizon',
@@ -36,6 +49,9 @@ return {
           'branch',
           harpoon_component,
           'diff',
+        },
+        lualine_c = {
+          clients_lsp,
           'diagnostics',
         },
       },
