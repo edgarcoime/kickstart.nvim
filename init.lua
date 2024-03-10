@@ -1,7 +1,6 @@
 -- need this line because not in default folder
 -- vim.cmd 'set runtimepath^=~/.config/nvim-configs/kickstart'
 require 'core'
-
 -- TODO: Find a way to incorporate lazy in its own seperate module
 
 -- require 'lazy'
