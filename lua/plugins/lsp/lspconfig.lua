@@ -2,7 +2,8 @@ return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
-    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp', -- breadcrumb like status bar
+    -- 'SmiteshP/nvim-navic',
     { 'antosha417/nvim-lsp-file-operations', config = true },
   },
   config = function()
@@ -12,10 +13,20 @@ return {
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 
+    -- import nvim-navic
+    -- local nvim_navic = require 'nvim-navic'
+    -- nvim_navic.setup {}
+
     local keymap = vim.keymap -- for conciseness
 
+    -- Will be attached to each LSP
+    -- Additional plugins that need to latch onto lsp can be put here
     local opts = { noremap = true, silent = true }
     local on_attach = function(client, bufnr)
+      -- if client.server_capabilities.documentSymbolProvider then
+      --   nvim_navic.attach(client, bufnr)
+      -- end
+
       opts.buffer = bufnr
 
       -- set keybinds
