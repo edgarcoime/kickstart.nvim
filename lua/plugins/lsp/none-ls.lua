@@ -1,5 +1,5 @@
 return {
-  'nvimtools/none-ls.nvim',               -- configure formatters & linters
+  'nvimtools/none-ls.nvim', -- configure formatters & linters
   lazy = true,
   event = { 'BufReadPre', 'BufNewFile' }, -- to enable uncomment this
   dependencies = {
@@ -21,7 +21,7 @@ return {
         -- Python Tools
         'black', -- python formatter
         'isort', -- python import formatter
-        -- 'pylint', -- python linter
+        'pylint', -- python linter
 
         -- Web config
         -- 'prettier', -- prettier formatter
@@ -30,11 +30,11 @@ return {
     }
 
     -- for conciseness
-    local formatting = null_ls.builtins.formatting   -- to setup formatters
+    local formatting = null_ls.builtins.formatting -- to setup formatters
     local diagnostics = null_ls.builtins.diagnostics -- to setup linters
 
     -- to setup format on save
-    -- local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+    local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
     null_ls.setup {
       -- debugging null ls issues
@@ -43,12 +43,13 @@ return {
       -- root_dir = null_ls_utils.root_pattern('.null-ls-root', 'Makefile', '.git', 'package.json'),
       -- setup formatters & linters
       sources = {
-        formatting.stylua, -- lua formatter
+        -- Lua tooling
+        formatting.stylua,
 
         -- Python tooling
         formatting.isort,
         formatting.black,
-        -- diagnostics.pylint,
+        diagnostics.pylint,
       },
       -- configure format on save
       on_attach = function(current_client, bufnr)

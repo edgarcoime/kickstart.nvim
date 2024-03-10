@@ -48,6 +48,9 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
     end
 
+    -- used to enable autocompletion (assign to every lsp server config)
+    local capabilities = cmp_nvim_lsp.default_capabilities()
+
     -- configure python server
     lspconfig['pyright'].setup {
       capabilities = capabilities,
