@@ -34,6 +34,9 @@ return {
       opts.desc = 'Show LSP type definitions'
       keymap.set('n', 'gt', '<cmd>Telescope lsp_type_definitions<CR>', opts) -- show lsp type definitions
 
+      opts.desc = 'Show LSP code actions'
+      keymap.set({ 'n' }, '<leader>ca', vim.lsp.buf.code_action, {})
+
       -- TODO: bind lsp info for current buffer
     end
 
