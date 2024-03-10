@@ -14,6 +14,8 @@ return {
       highlight = { enable = true },
       indent = { enable = true },
       autotag = { enable = true },
+      -- auto install any that i don't have
+      auto_install = true,
       -- ensure languages are installed
       ensure_installed = {
         'json',
