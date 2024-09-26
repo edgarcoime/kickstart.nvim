@@ -29,7 +29,13 @@ opt.scrolloff = 10
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 opt.list = true
-opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+opt.listchars = { tab = '▏ ', trail = '·', nbsp = '␣' }
+-- opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- opt.listchars = {
+--  tab = '▏ ',
+--  trail = '·',
+--  nbsp = '␣',
+-- }
 
 -- Decrease update time
 -- opt.updatetime = 250

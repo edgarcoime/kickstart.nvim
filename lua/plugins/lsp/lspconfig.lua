@@ -1,0 +1,98 @@
+return {
+  'neovim/nvim-lspconfig',
+  event = { 'BufReadPre', 'BufNewFile' },
+  dependencies = {
+    'hrsh7th/cmp-nvim-lsp', -- breadcrumb like status bar
+    -- 'SmiteshP/nvim-navic',
+    { 'antosha417/nvim-lsp-file-operations', config = true },
+  },
+  config = function()
+    -- import lspconfig plugin
+    local lspconfig = require 'lspconfig'
+
+    -- import cmp-nvim-lsp plugin
+    local cmp_nvim_lsp = require 'cmp_nvim_lsp'
+
+    -- import nvim-navic
+    -- local nvim_navic = require 'nvim-navic'
+    -- nvim_navic.setup {}
+
+    local keymap = vim.keymap -- for conciseness
+
+    -- Will be attached to each LSP
+    -- Additional plugins that need to latch onto lsp can be put here
+    local opts = { noremap = true, silent = true }
+    local on_attach = function(client, bufnr)
+      -- if client.server_capabilities.documentSymbolProvider then
+      --   nvim_navic.attach(client, bufnr)
+      -- end
+
+      opts.buffer = bufnr
+
+      -- set keybinds
+      opts.desc = 'Show LSP references'
+      keymap.set('n', 'gR', '<cmd>Telescope lsp_references<CR>', opts) -- show definition, references
+
+      opts.desc = 'Go to declaration'
+      keymap.set('n', 'gD', vim.lsp.buf.declaration, opts) -- go to declaration
+
+      opts.desc = 'Show LSP definitions'
+      keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts) -- show lsp definitions
+
+      opts.desc = 'Show LSP implementations'
+      keymap.set('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts) -- show lsp implementations
+
+      opts.desc = 'Show LSP type definitions'
+      keymap.set('n', 'gt', '<cmd>Telescope lsp_type_definitions<CR>', opts) -- show lsp type definitions
+
+      opts.desc = 'Show LSP code actions'
+      keymap.set({ 'n' }, '<leader>ca', vim.lsp.buf.code_action, {})
+
+      -- TODO: bind lsp info for current buffer
+    end
+
+    -- used to enable autocompletion (assign to every lsp server config)
+    -- Change the diagnostic symbols in the sign column (gutter)
+    local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
+    for type, icon in pairs(signs) do
+      local hl = 'DiagnosticSign' .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+    end
+
+    -- used to enable autocompletion (assign to every lsp server config)
+    local capabilities = cmp_nvim_lsp.default_capabilities()
+
+    -- configure python server
+    lspconfig['pyright'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+
+    -- configure golang server
+    lspconfig['gopls'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+
+    -- configure lua server (with special settings)
+    lspconfig['lua_ls'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = { -- custom settings for lua
+        Lua = {
+          -- make the language server recognize "vim" global
+          diagnostics = {
+            globals = { 'vim' },
+          },
+          workspace = {
+            -- make language server aware of runtime files
+            library = {
+              [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+              [vim.fn.stdpath 'config' .. '/lua'] = true,
+            },
+          },
+        },
+      },
+    }
+  end,
+}
