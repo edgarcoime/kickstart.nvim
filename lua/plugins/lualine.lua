@@ -20,7 +20,9 @@ end
 -- formatters and linters from null-ls, nvim-lint and formatter.nvim
 
 local function get_attached_clients()
-  local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
+  -- deprecated get_active_clients
+  -- local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
+  local buf_clients = vim.lsp.get_clients { bufnr = 0 }
   if #buf_clients == 0 then
     return 'LSP Inactive'
   end
@@ -100,54 +102,6 @@ local function get_attached_clients()
   local language_servers = string.format('[%s]', client_names_str)
 
   return language_servers
-end
-
--- FAILED Attempts
--- TODO: Can i detach coupling of none-ls here?
-local get_active_clients = function()
-  local lsp_clients = vim.lsp.get_active_clients()
-  -- local null_ls_clients = require('none-ls').get_active_clients()
-  local c_list = {}
-
-  if next(lsp_clients) == nil then
-    return ''
-  end
-
-  -- extract names from LSP clients
-  for _, c in pairs(lsp_clients) do
-    -- ensure none-ls not there
-    c_list[c.name] = true
-  end
-
-  -- Check if null-ls is active
-  if c_list['null-ls'] ~= nil then
-    c_list['null-ls'] = nil
-    c_list['yo-man'] = true
-    -- for _, c in pairs(null_ls_clients) do
-    --   c_list[c.name] = true
-    -- end
-  end
-
-  -- get all ls names
-  local c_names = {}
-  for k, _ in pairs(c_list) do
-    table.insert(c_names, k)
-  end
-
-  return ': ' .. table.concat(c_names, '|')
-end
-
-local clients_lsp = function()
-  local clients = vim.lsp.buf_get_clients()
-  if next(clients) == nil then
-    return ''
-  end
-
-  local c = {}
-  for _, client in pairs(clients) do
-    table.insert(c, client.name)
-  end
-  return ': ' .. table.concat(c, '|')
 end
 
 return {
