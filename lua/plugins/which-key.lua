@@ -42,7 +42,6 @@ return { -- Useful plugin to show you pending keybinds.
     wk.add {
       { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
       { '<leader>d', group = '[D]iagnostics' },
-      { '<leader>r', group = '[R]ename' },
       { '<leader>s', group = '[S]earch' },
       { '<leader>t', group = '[T]ab' },
       { '<leader>g', group = '[G]it' },

@@ -1,5 +1,5 @@
 return {
-  'nvimtools/none-ls.nvim',               -- configure formatters & linters
+  'nvimtools/none-ls.nvim', -- configure formatters & linters
   lazy = true,
   event = { 'BufReadPre', 'BufNewFile' }, -- to enable uncomment this
   dependencies = {
@@ -19,8 +19,8 @@ return {
         'stylua', -- lua formatter
 
         -- Python Tools
-        'black',  -- python formatter
-        'isort',  -- python import formatter
+        'black', -- python formatter
+        'isort', -- python import formatter
         'pylint', -- python linter
 
         -- Golang tooling
@@ -34,7 +34,7 @@ return {
     }
 
     -- for conciseness
-    local formatting = null_ls.builtins.formatting   -- to setup formatters
+    local formatting = null_ls.builtins.formatting -- to setup formatters
     local diagnostics = null_ls.builtins.diagnostics -- to setup linters
 
     -- to setup format on save
@@ -80,6 +80,6 @@ return {
       end,
     }
 
-    vim.keymap.set('n', '<leader>gf', vim.lsp.buf.format, {})
+    -- vim.keymap.set('n', '<leader>gf', vim.lsp.buf.format, {})
   end,
 }
