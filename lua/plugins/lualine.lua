@@ -32,7 +32,13 @@ local function get_attached_clients()
 
   -- add client
   for _, client in pairs(buf_clients) do
-    if client.name ~= 'copilot' and client.name ~= 'null-ls' then
+    -- -- filters out copilot and null ls
+    -- if client.name ~= 'copilot' and client.name ~= 'null-ls' then
+    --   table.insert(buf_client_names, client.name)
+    -- end
+
+    -- filters out null ls
+    if client.name ~= 'null-ls' then
       table.insert(buf_client_names, client.name)
     end
   end

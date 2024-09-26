@@ -16,6 +16,9 @@ return {
 
     -- vs-code like pictograms
     'onsails/lspkind.nvim',
+
+    -- copilot integration
+    'zbirenbaum/copilot-cmp',
   },
   config = function()
     local cmp = require 'cmp'
@@ -52,16 +55,19 @@ return {
       -- sources for autocompletion
       sources = cmp.config.sources {
         -- Traditional nvim_lsp integration but will use another package first
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' }, -- snippets
-        { name = 'buffer' }, -- text within current buffer
-        { name = 'path' }, -- file system paths
+        { name = 'nvim_lsp', group_index = 1 },
+        { name = 'luasnip', group_index = 2 },
+        { name = 'copilot', group_index = 4 }, -- copilot
+        { name = 'buffer', group_index = 10 }, -- text within current buffer
+        { name = 'path', group_index = 11 }, -- file system paths
       },
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
         format = lspkind.cmp_format {
+          mode = 'symbol',
           maxwidth = 50,
           ellipsis_char = '...',
+          symbol_map = { Copilot = '' },
         },
       },
     }

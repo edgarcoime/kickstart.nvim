@@ -77,7 +77,8 @@ return {
       -- or a suggestion from your LSP for this to activate.
       map('<leader>da', vim.lsp.buf.code_action, '[D]iag... Code [A]ction')
 
-      -- TODO: bind lsp info for current buffer
+      -- Copilot toggle panel
+      map('<leader>dc', '<cmd>:Copilot panel<CR>', '[D]iag... [C]opilot Panel')
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
