@@ -1,5 +1,9 @@
 local opt = vim.opt
 
+vim.scriptencoding = "utf-8"
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 opt.mouse = "a"
 
@@ -12,13 +16,15 @@ opt.tabstop = 2 -- 2 spaces for tabs
 opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- true
 opt.autoindent = true -- copy indent from cur line when starting new
+opt.smartindent = true
+opt.smarttab = true
 
--- line wrapping
 -- line wrapping
 opt.wrap = true
 opt.breakindent = true
 opt.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly
 opt.linebreak = true
+
 -- Remap for dealing with word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -37,16 +43,6 @@ opt.scrolloff = 10
 --  and `:help 'listchars'`
 opt.list = true
 opt.listchars = { tab = "▏ ", trail = "·", nbsp = "␣" }
--- opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
--- opt.listchars = {
---  tab = '▏ ',
---  trail = '·',
---  nbsp = '␣',
--- }
-
--- Decrease update time
--- opt.updatetime = 250
--- opt.timeoutlen = 300
 
 -- Save undo history
 opt.undofile = true
@@ -61,7 +57,7 @@ opt.background = "dark" -- colorchemes that can be light or dark will default da
 opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 
 -- backspace
-opt.backspace = "indent,eol,start" -- allow backspace on indent, endofline, or insert mode start pos
+opt.backspace = {"start", "eol", "indent"}-- allow backspace on indent, endofline, or insert mode start pos
 
 -- clipboard
 opt.clipboard:append("unnamedplus") -- use system clipboard as default reg
@@ -69,6 +65,8 @@ opt.clipboard:append("unnamedplus") -- use system clipboard as default reg
 -- split windows
 opt.splitright = true -- split v to right
 opt.splitbelow = true -- split h borrom
+opt.splitkeep = "cursor"
+
 
 -- turn off swap file
 opt.swapfile = false
@@ -86,34 +84,13 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<C-s>", "<cmd>w!<cr>", { desc = "Force Write" })
 vim.keymap.set("n", "<C-q>", "<cmd>qa!<cr>", { desc = "Force Quit" })
 
--- Diagnostic keymaps
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
+-- TODO: is this even needed?
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
+-- vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+-- vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+-- vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+-- vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -126,3 +103,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- misc
+opt.path:append({"**"})
+opt.wildignore:append({"*/node_modules/*"})
