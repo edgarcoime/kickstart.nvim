@@ -57,16 +57,15 @@ opt.background = "dark" -- colorchemes that can be light or dark will default da
 opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 
 -- backspace
-opt.backspace = {"start", "eol", "indent"}-- allow backspace on indent, endofline, or insert mode start pos
+opt.backspace = { "start", "eol", "indent" } -- allow backspace on indent, endofline, or insert mode start pos
 
 -- clipboard
-opt.clipboard:append("unnamedplus") -- use system clipboard as default reg
+opt.clipboard:append "unnamedplus" -- use system clipboard as default reg
 
 -- split windows
 opt.splitright = true -- split v to right
 opt.splitbelow = true -- split h borrom
 opt.splitkeep = "cursor"
-
 
 -- turn off swap file
 opt.swapfile = false
@@ -96,13 +95,13 @@ vim.keymap.set("n", "<C-q>", "<cmd>qa!<cr>", { desc = "Force Quit" })
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+  desc = "Highlight when yanking (copying) text",
+  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
 -- misc
-opt.path:append({"**"})
-opt.wildignore:append({"*/node_modules/*"})
+opt.path:append { "**" }
+opt.wildignore:append { "*/node_modules/*" }
