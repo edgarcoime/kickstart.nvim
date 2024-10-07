@@ -1,6 +1,6 @@
 -- FIX: need to rework for harpoon 2
 local function get_harpoon_files()
-  local hMark = require "harpoon.mark"
+  local hMark = require("harpoon.mark")
   local total_marks = hMark.get_length()
 
   if total_marks == 0 then
@@ -23,7 +23,7 @@ end
 local function get_attached_clients()
   -- deprecated get_active_clients
   -- local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
-  local buf_clients = vim.lsp.get_clients { bufnr = 0 }
+  local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
   if #buf_clients == 0 then
     return "LSP Inactive"
   end
@@ -83,7 +83,7 @@ local function get_attached_clients()
   -- Add formatters (from formatter.nvim)
   local formatter_s, _ = pcall(require, "formatter")
   if formatter_s then
-    local formatter_util = require "formatter.util"
+    local formatter_util = require("formatter.util")
     for _, formatter in ipairs(formatter_util.get_available_formatters_for_ft(buf_ft)) do
       if formatter then
         table.insert(buf_client_names, formatter)
@@ -112,7 +112,7 @@ local function get_attached_clients()
 end
 
 -- Custom harpoon component in status bar
-require("lualine").setup {
+require("lualine").setup({
   options = {
     -- theme = "horizon",
     -- theme = 'dracula',
@@ -141,4 +141,4 @@ require("lualine").setup {
       "filetype",
     },
   },
-}
+})

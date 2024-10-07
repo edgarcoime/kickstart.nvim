@@ -7,11 +7,19 @@ local opts = function(desc)
   return { noremap = true, silent = true, desc = desc }
 end
 
+-- ensure jump list keybinds are not overwritten
+-- keymap.set("n", "<C-o>", "g;", { noremap = true, silent = true })
+-- keymap.set("n", "<C-i>", "g,", { noremap = true, silent = true })
+
 -- cutting single characters don't put to register
-keymap.set("n", "x", '"_x"')
+-- WARN: enabling makes deleting with x slow
+-- keymap.set("n", "x", '"_x"')
+
+-- remap ensure q recording
+keymap.set("n", "<leader>q", "@", opts "Record macro")
 
 -- Diagnostic keymaps
-keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts "Open diagnostic [Q]uickfix list")
+-- keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts "Open diagnostic [Q]uickfix list")
 
 -- Set ctrl q and ctrl s as save
 keymap.set("n", "<C-s>", "<cmd>w!<cr>", opts "Force Write")
@@ -26,7 +34,7 @@ vim.api.nvim_set_keymap("n", "<leader>el", "<cmd>set wrap!<CR>", opts "Toggle li
 
 -- tabs
 keymap.set("n", "<leader>te", "<cmd>tabedit<cr>", opts "Edit tab")
-keymap.set("n", "<tab>", "<cmd>tabnext<Return><cr>", opts "Progress forward tabs")
+-- keymap.set("n", "<tab>", "<cmd>tabnext<Return><cr>", opts "Progress forward tabs")
 keymap.set("n", "<s-tab>", "<cmd>tabprev<Return><cr>", opts "Progress backward tabs")
 keymap.set("n", "<leader>tq", "<cmd>tabclose<cr>", opts "Close tab")
 
