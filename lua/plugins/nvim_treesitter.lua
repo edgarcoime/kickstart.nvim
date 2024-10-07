@@ -2,15 +2,12 @@ return {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
-  dependencies = {
-    "windwp/nvim-ts-autotag",
-  },
   config = function()
-    local treesitter = require "nvim-treesitter.configs"
+    local treesitter = require("nvim-treesitter.configs")
 
     -- configure treesitter
     ---@diagnostic disable-next-line: missing-fields
-    treesitter.setup {
+    treesitter.setup({
       highlight = {
         enable = true,
         disable = { "rust" },
@@ -49,6 +46,6 @@ return {
           node_decremental = "<bs>",
         },
       },
-    }
+    })
   end,
 }

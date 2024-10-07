@@ -12,7 +12,11 @@ return {
       "hrsh7th/cmp-path", -- source for file system paths
 
       -- Luasnip recommendations
-      { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
+      {
+        "L3MON4D3/LuaSnip",
+        build = "make install_jsregexp",
+        dependencies = { "rafamadriz/friendly-snippets" },
+      },
       "saadparwaiz1/cmp_luasnip", -- for autocompletion
 
       -- copilot integration
@@ -31,11 +35,11 @@ return {
       cmp.setup({
         -- add lsp sources here
         sources = {
-          { name = "copilot" }, -- copilot
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "buffer" }, -- text within current buffer
           { name = "path" }, -- file system paths
+          { name = "copilot" }, -- copilot
         },
 
         -- Keybindings
@@ -69,6 +73,35 @@ return {
           documentation = cmp.config.window.bordered(),
         },
       })
+
+      -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
+      require("luasnip.loaders.from_vscode").lazy_load()
+
+      -- configure snippets
+      local snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      }
+
+      -- Load in all snippets from path
+      for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/custom/snippets/*.lua", true)) do
+        loadfile(ft_path)()
+      end
+
+      -- keymap to interact with snippet
+      vim.keymap.set({ "i", "s" }, "<c-j>", function()
+        if luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        end
+      end, { silent = true })
+
+      --
+      vim.keymap.set({ "i", "s" }, "<c-k>", function()
+        if luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        end
+      end, { silent = true })
     end,
   },
 }

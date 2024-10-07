@@ -65,7 +65,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     map("n", "<leader>gb", builtin.git_bcommits, "[S]earch Git [C]ommits for buffer")
 
     -- additionals
-    map("n", "<leader>sn", "<cmd>Telescope noice<cr>", "[S]earch Git [C]ommits")
+    map("n", "<leader>sn", "<cmd>Telescope noice<cr>", "[S]earch [N]oice output")
 
     -- telescope mappings
     map("n", "<leader>sf", builtin.find_files, "[S]earch [F]iles")
