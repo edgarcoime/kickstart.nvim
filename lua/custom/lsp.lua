@@ -7,7 +7,7 @@ function M.onAttachCreator(addFn)
     addFn()
   end
   return function(client, bufnr)
-    local tb = require "telescope.builtin"
+    local tb = require("telescope.builtin")
     local map = function(keys, func, desc)
       vim.keymap.set("n", keys, func, { buffer = bufnr, silent = true, noremap = true, desc = "LSP: " .. desc })
     end
@@ -57,17 +57,6 @@ function M.onAttachCreator(addFn)
 
     -- Copilot toggle panel
     map("<leader>lc", "<cmd>:Copilot panel<CR>", "[D]iag... [C]opilot Panel")
-
-    -- Test shortcuts
-    map("<leader>dP", function()
-      print "Test shortcut under <leader>d"
-    end, "Test shortcut")
-    map("<leader>gP", function()
-      print "Test shortcut under <leader>g"
-    end, "Test shortcut")
-    map("<leader>hP", function()
-      print "Test shortcut under <leader>h"
-    end, "Test shortcut")
   end
 end
 

@@ -14,6 +14,9 @@ return {
       -- Luasnip recommendations
       { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
       "saadparwaiz1/cmp_luasnip", -- for autocompletion
+
+      -- copilot integration
+      "zbirenbaum/copilot-cmp",
     },
     config = function()
       vim.opt.completeopt = { "menu", "menuone", "noselect", "preview" }
@@ -28,8 +31,11 @@ return {
       cmp.setup({
         -- add lsp sources here
         sources = {
+          { name = "copilot" }, -- copilot
           { name = "nvim_lsp" },
           { name = "luasnip" },
+          { name = "buffer" }, -- text within current buffer
+          { name = "path" }, -- file system paths
         },
 
         -- Keybindings
