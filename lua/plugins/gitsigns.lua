@@ -8,9 +8,6 @@ return {
       local gitsigns = require("gitsigns")
 
       local function map(mode, l, r, desc)
-        -- local opts = { desc = "Gitsigns: " .. desc }
-        -- vim.keymap.set("n", keys, func, { buffer = bufnr, silent = true, noremap = true, desc = "LSP: " .. desc })
-        -- local opts = { buffer = bufnr , desc = "Gitsigns: " .. desc }
         vim.keymap.set(mode, l, r, { buffer = bufnr, desc = "Gitsigns: " .. desc })
       end
 

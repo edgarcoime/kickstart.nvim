@@ -17,7 +17,7 @@ return {
     },
     event = "VeryLazy",
     config = function()
-      require "custom.lualine"
+      require("custom.lualine")
     end,
   },
 
@@ -39,11 +39,11 @@ return {
     },
 
     config = function()
-      print "From noice"
+      print("From noice")
       local keymap = vim.keymap
       keymap.set("n", "<leader>ed", "<cmd>NoiceDismiss<cr>", { desc = "Noice: Dismiss Noice messages", noremap = true, silent = true })
 
-      require("noice").setup {
+      require("noice").setup({
         lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
           override = {
@@ -60,7 +60,7 @@ return {
           inc_rename = false, -- enables an input dialog for inc-rename.nvim
           lsp_doc_border = true, -- add a border to hover docs and signature help
         },
-      }
+      })
     end,
   },
 
@@ -88,8 +88,8 @@ return {
     event = "BufReadPre",
     priority = 1200,
     config = function()
-      local helpers = require "incline.helpers"
-      require("incline").setup {
+      local helpers = require("incline.helpers")
+      require("incline").setup({
         window = {
           padding = 0,
           margin = { horizontal = 0 },
@@ -107,7 +107,7 @@ return {
           }
           return buffer
         end,
-      }
+      })
     end,
   },
 }
