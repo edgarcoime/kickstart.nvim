@@ -48,9 +48,6 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
-      -- extended functionality
-      "SmiteshP/nvim-navic",
-
       -- Additionals
       "mrcjkb/rustaceanvim",
     },

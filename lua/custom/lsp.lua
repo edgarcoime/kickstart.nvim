@@ -7,10 +7,6 @@ function M.onAttachCreator(addFn)
     addFn()
   end
   return function(client, bufnr)
-    -- NOTE: "SmiteshP/nvim-navic" needs to be setup
-    local navic = require("nvim-navic")
-    navic.attach(client, bufnr)
-
     local tb = require("telescope.builtin")
     local map = function(keys, func, desc)
       vim.keymap.set("n", keys, func, { buffer = bufnr, silent = true, noremap = true, desc = "LSP: " .. desc })
