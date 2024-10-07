@@ -8,10 +8,10 @@ return {
     },
     config = function()
       -- import mason
-      local mason = require("mason")
+      local mason = require "mason"
 
       -- enable mason and configure icons
-      mason.setup({
+      mason.setup {
         ui = {
           icons = {
             package_installed = "✓",
@@ -19,7 +19,7 @@ return {
             package_uninstalled = "✗",
           },
         },
-      })
+      }
     end,
   },
   {
@@ -35,24 +35,24 @@ return {
     },
     config = function()
       -- import lspconfig plugin
-      local lspconfig = require("lspconfig")
-      local util = require("lspconfig/util")
+      local lspconfig = require "lspconfig"
+      local util = require "lspconfig/util"
 
       -- import cmp-nvim-lsp plugin
-      local cmp_nvim_lsp = require("cmp_nvim_lsp")
+      local cmp_nvim_lsp = require "cmp_nvim_lsp"
 
       -- ####################### SETUP MASON REQUIREMENTS #######################
       -- import mason-lspconfig
-      local mason_lspconfig = require("mason-lspconfig")
+      local mason_lspconfig = require "mason-lspconfig"
 
       -- import mason-tool-installer
-      local mason_tool_installer = require("mason-tool-installer")
+      local mason_tool_installer = require "mason-tool-installer"
 
       -- enable mason-lspconfig
       -- Listing all LSP servers
       -- https://github.com/williamboman/mason-lspconfig.nvim
       -- RESPONSIBLE FOR MAKING SURE **LSPS** ARE INSTALLED AND READY FOR MASON
-      mason_lspconfig.setup({
+      mason_lspconfig.setup {
         -- list servers mason should install
         ensure_installed = {
           -- Lua tooling
@@ -79,12 +79,12 @@ return {
         },
         -- auto-install configured servers (with lspconfig)
         automatic_installation = true, -- not the same as ensure installed
-      })
+      }
 
       -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
       -- TODO: Might not be needed?
       -- RESPONSIBLE FOR ENSURING **THIRD PARTY** TOOLS ARE INSTALLED
-      mason_tool_installer.setup({
+      mason_tool_installer.setup {
         ensure_installed = {
           -- "prettier", -- prettier formatter
           -- "stylua", -- lua formatter
@@ -94,7 +94,7 @@ return {
           -- "eslint_d", -- js linter
         },
         auto_update = true,
-      })
+      }
       -- ####################### SETUP MASON REQUIREMENTS #######################
 
       -- import nvim-navic
@@ -134,10 +134,10 @@ return {
 
       -- default options application
       local function defaultSettings(srvr)
-        lspconfig[srvr].setup({
+        lspconfig[srvr].setup {
           capabilities = capabilities,
           on_attach = on_attach,
-        })
+        }
       end
 
       -- loop over defaultLSPs and apply default settings
@@ -145,14 +145,14 @@ return {
         defaultSettings(srvr)
       end
 
-      lspconfig.harper_ls.setup({
+      lspconfig.harper_ls.setup {
         capabilities = capabilities,
         on_attach = on_attach,
         filetypes = { "json", "toml", "markdown", "gitcommit" },
-      })
+      }
 
       -- configure lua server (with special settings)
-      lspconfig["lua_ls"].setup({
+      lspconfig["lua_ls"].setup {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = { -- custom settings for lua
@@ -164,13 +164,13 @@ return {
             workspace = {
               -- make language server aware of runtime files
               library = {
-                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                [vim.fn.stdpath("config") .. "/lua"] = true,
+                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+                [vim.fn.stdpath "config" .. "/lua"] = true,
               },
             },
           },
         },
-      })
+      }
     end,
   },
 }

@@ -1,3 +1,4 @@
+-- TODO: Move to lsp folder/file
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -16,15 +17,15 @@ return {
     },
     config = function()
       vim.opt.completeopt = { "menu", "menuone", "noselect", "preview" }
-      vim.opt.shortmess:append("c")
+      vim.opt.shortmess:append "c"
 
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
-      local lspkind = require("lspkind")
+      local cmp = require "cmp"
+      local luasnip = require "luasnip"
+      local lspkind = require "lspkind"
 
-      lspkind.init({})
+      lspkind.init {}
 
-      cmp.setup({
+      cmp.setup {
         -- add lsp sources here
         sources = {
           { name = "nvim_lsp" },
@@ -32,9 +33,9 @@ return {
         },
 
         -- Keybindings
-        mapping = cmp.mapping.preset.insert({
-          ["<C-p>"] = cmp.mapping.select_prev_item({ behaviour = cmp.SelectBehavior.Insert }), -- previous suggestion
-          ["<C-n>"] = cmp.mapping.select_next_item({ behaviour = cmp.SelectBehavior.Insert }), -- next suggestion
+        mapping = cmp.mapping.preset.insert {
+          ["<C-p>"] = cmp.mapping.select_prev_item { behaviour = cmp.SelectBehavior.Insert }, -- previous suggestion
+          ["<C-n>"] = cmp.mapping.select_next_item { behaviour = cmp.SelectBehavior.Insert }, -- next suggestion
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-e>"] = cmp.mapping.abort(), -- close completion window
@@ -44,16 +45,16 @@ return {
             behaviour = cmp.ConfirmBehavior.Insert,
             select = true,
           }, { "i", "c" })),
-        }),
+        },
 
         -- configure lspkind for vs-code like pictograms in completion menu
         formatting = {
-          format = lspkind.cmp_format({
+          format = lspkind.cmp_format {
             mode = "symbol",
             maxwidth = 50,
             ellipsis_char = "...",
             symbol_map = { Copilot = "" },
-          }),
+          },
         },
 
         -- look of window
@@ -61,8 +62,7 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-      })
+      }
     end,
   },
 }
-

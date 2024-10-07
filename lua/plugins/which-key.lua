@@ -48,7 +48,9 @@ return { -- Useful plugin to show you pending keybinds.
       { "<leader>l", group = "[L]SP" },
       { "<leader>s", group = "[S]earch" },
       { "<leader>t", group = "[T]ab" },
-      { "<leader>h", group = "Git [H]unk" },
+      -- { "<leader>h", group = "Git [H]unk" },
+      { "<leader>g", group = "[G]it" },
+      { "<leader>gt", group = "[G]it [T]oggle" },
       { "<leader>w", group = "[W]orkspace" },
       { "<leader>e", group = "[E]ditor" },
     }

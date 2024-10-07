@@ -1,13 +1,14 @@
 return {
-  'nvim-lua/plenary.nvim', -- lua functions that many plugins use
+  "nvim-lua/plenary.nvim", -- lua functions that many plugins use
 
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
-  { 'numToStr/Comment.nvim', opts = {} },
+  -- TODO: Double check to see if necessary
+  -- { 'numToStr/Comment.nvim', opts = {} },
 
   {
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
     config = true,
   },
 }
