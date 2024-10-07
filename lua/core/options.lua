@@ -60,7 +60,7 @@ opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 opt.backspace = { "start", "eol", "indent" } -- allow backspace on indent, endofline, or insert mode start pos
 
 -- clipboard
-opt.clipboard:append "unnamedplus" -- use system clipboard as default reg
+opt.clipboard:append("unnamedplus") -- use system clipboard as default reg
 
 -- split windows
 opt.splitright = true -- split v to right
@@ -103,5 +103,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- misc
-opt.path:append { "**" }
-opt.wildignore:append { "*/node_modules/*" }
+opt.path:append({ "**" })
+opt.wildignore:append({ "*/node_modules/*" })
