@@ -111,6 +111,9 @@ local function get_attached_clients()
   return language_servers
 end
 
+-- TODO: find alternative hasn't been updated since 2024-11-30
+local navic_display = function() end
+
 -- Custom harpoon component in status bar
 require("lualine").setup({
   options = {

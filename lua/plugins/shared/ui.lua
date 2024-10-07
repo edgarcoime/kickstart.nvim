@@ -91,8 +91,8 @@ return {
     event = "BufReadPre",
     priority = 1200,
     config = function()
-      -- require("custom.incline").renderWithIconName()
-      require("custom.incline").renderWithNavic()
+      require("custom.incline").renderWithIconName()
+      -- require("custom.incline").renderWithNavic()
     end,
   },
 }

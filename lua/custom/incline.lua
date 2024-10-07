@@ -13,9 +13,13 @@ M.renderWithIconName = function()
       -- vim.fn.expand("%:t")
       -- vim.fn.fnamemodify()
 
-      -- :h:t gets parent directory
-      local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-      local display_name = string.format("%s/%s", vim.fn.expand("%:h:t"), filename)
+      -- local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+      -- local display_name = string.format("%s/%s", vim.fn.expand("%:h:t"), filename)
+      -- local parent_dir = vim.fn.expand("%:h:t")
+
+      -- https://neovim.io/doc/user/cmdline.html#filename-modifiers
+      local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":p:.")
+      local display_name = filename
 
       -- local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":p:h")
       local ft_icon, ft_color = devicons.get_icon_color(filename)
@@ -32,6 +36,8 @@ M.renderWithIconName = function()
   })
 end
 
+-- TODO: Errors for lsps that don't have file structure component. Need to loop through and omit
+-- the lsps that don't have it.
 M.renderWithNavic = function()
   local navic = require("nvim-navic")
   local helpers = require("incline.helpers")
