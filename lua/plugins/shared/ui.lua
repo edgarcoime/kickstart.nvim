@@ -39,7 +39,6 @@ return {
     },
 
     config = function()
-      print("From noice")
       local keymap = vim.keymap
       keymap.set("n", "<leader>ed", "<cmd>NoiceDismiss<cr>", { desc = "Noice: Dismiss Noice messages", noremap = true, silent = true })
 
